@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {Control, Controller} from 'react-hook-form';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 interface FormData {
   email: string;
@@ -9,7 +9,7 @@ interface FormData {
 
 interface InputFieldProps {
   label: string;
-  inputType?: 'password';
+  type?: 'password';
   error?: string;
   control: Control<FormData>;
   name: keyof FormData;
@@ -17,43 +17,28 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({
   label,
-  inputType,
+  type,
   error,
   control,
   name,
 }) => {
   return (
     <View style={styles.container}>
-      {inputType === 'password' ? (
-        <Controller
-          control={control}
-          name={name}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              placeholder={label}
-              style={[styles.input, {flex: 1}]}
-              secureTextEntry={true}
-              onBlur={onBlur}
-              onChangeText={text => onChange(text)}
-              value={value}
-            />
-          )}
-        />
-      ) : (
-        <Controller
-          control={control}
-          name={name}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              placeholder={label}
-              style={[styles.input, {flex: 1}]}
-              onBlur={onBlur}
-              onChangeText={text => onChange(text)}
-              value={value}
-            />
-          )}
-        />
-      )}
+      <Controller
+        control={control}
+        name={name}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            placeholder={label}
+            style={[styles.input, {flex: 1}]}
+            secureTextEntry={type === 'password'}
+            onBlur={onBlur}
+            onChangeText={text => onChange(text)}
+            value={value}
+          />
+        )}
+      />
+
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );

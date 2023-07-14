@@ -1,10 +1,9 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {SubmitHandler} from 'react-hook-form';
-
-import InputField from '../components/InputField';
-import CustomButton from '../components/CustomButton';
+import CustomButton from './CustomButton';
+import InputField from './InputField';
 import useAuthForm from './hooks/useAuthForm';
+import React from 'react';
+import {SubmitHandler} from 'react-hook-form';
+import {StyleSheet, Text, View} from 'react-native';
 
 interface FormData {
   email: string;
@@ -33,7 +32,7 @@ const AuthForm = () => {
 
       <InputField
         label="Password"
-        inputType="password"
+        type="password"
         error={errors.password?.message}
         control={control}
         name="password"

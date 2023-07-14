@@ -1,12 +1,12 @@
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 interface CustomButtonProps {
   label: string;
   onPress: () => void;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({label, onPress}) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ label, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
       <Text style={styles.buttonText}>{label}</Text>
