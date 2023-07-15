@@ -1,21 +1,26 @@
+import React from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import { StyleSheet, Text, View } from 'react-native';
 import CustomButton from './CustomButton';
+
 import InputField from './InputField';
 import useAuthForm from './hooks/useAuthForm';
-import React from 'react';
-import {SubmitHandler} from 'react-hook-form';
-import {StyleSheet, Text, View} from 'react-native';
+import { signIn } from '../services/authAPI';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParams } from '../App';
 
-interface FormData {
+export interface FormData {
   email: string;
   password: string;
 }
 
 const AuthForm = () => {
-  const onSubmit: SubmitHandler<FormData> = data => {
-    console.log(data);
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const onSubmit: SubmitHandler<FormData> = async data => {
+    await signIn(data, navigation);
   };
 
-  const {handleSubmit, control, errors} = useAuthForm(onSubmit);
+  const { handleSubmit, control, errors } = useAuthForm(onSubmit);
 
   return (
     <View style={styles.contentContainer}>
