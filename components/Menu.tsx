@@ -1,8 +1,8 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {FC} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {RootStackParams} from '../App';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParams } from '../App';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface MenuProps {}
 
