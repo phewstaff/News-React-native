@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, useColorScheme} from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import NewsScreen from './screens/News';
 import AuthScreen from './screens/Auth';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type RootStackParams = {
   News: undefined;
