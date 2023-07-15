@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {SubmitHandler, useForm} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface FormData {
   email: string;
@@ -16,7 +16,7 @@ const useAuthForm = (onSubmit: SubmitHandler<FormData>) => {
   const {
     handleSubmit,
     control,
-    formState: {errors},
+    formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
   });
