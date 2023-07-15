@@ -1,7 +1,20 @@
 module.exports = {
   arrowParens: 'avoid',
   bracketSameLine: true,
-  bracketSpacing: false,
+  bracketSpacing: true,
   singleQuote: true,
   trailingComma: 'all',
+  importOrder: [
+    '^navigators/(.*)$',
+    '^screens/(.*)$',
+    '^layouts/(.*)$',
+    '^components/(.*)$',
+    '^assets/(.*)$',
+    '^atoms/(.*)$',
+    '^utils/(.*)$',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  importOrderGroupNamespaceSpecifiers: true,
 };
