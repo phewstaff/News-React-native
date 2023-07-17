@@ -1,5 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 interface CustomButtonProps {
   label: string;
@@ -7,9 +12,21 @@ interface CustomButtonProps {
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({ label, onPress }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handlePress = async () => {
+    setLoading(true);
+    await onPress();
+    setLoading(false);
+  };
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.buttonText}>{label}</Text>
+    <TouchableOpacity onPress={handlePress} style={styles.button}>
+      {loading ? (
+        <ActivityIndicator color="#fff" />
+      ) : (
+        <Text style={styles.buttonText}>{label}</Text>
+      )}
     </TouchableOpacity>
   );
 };
