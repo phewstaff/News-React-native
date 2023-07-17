@@ -1,17 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { StyleSheet, useColorScheme } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
+import CustomHeader from './components/CustomHeader';
 import { setupStore } from './redux/store';
 import AuthScreen from './screens/Auth';
 import NewsScreen from './screens/News';
+import NewsArticleScreen from './screens/NewsArticle';
 
 export type RootStackParams = {
   News: undefined;
   Auth: undefined;
+  NewsArticle: { newsId: string };
 };
 
 const store = setupStore();
@@ -19,12 +21,6 @@ const store = setupStore();
 const RootStack = createNativeStackNavigator<RootStackParams>();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <>
       <Provider store={store}>
@@ -32,10 +28,15 @@ const App = () => {
           <RootStack.Navigator>
             <RootStack.Screen
               name="News"
-              component={NewsScreen}></RootStack.Screen>
+              component={NewsScreen}
+              options={{ header: () => <CustomHeader /> }}></RootStack.Screen>
             <RootStack.Screen
               name="Auth"
               component={AuthScreen}></RootStack.Screen>
+            <RootStack.Screen
+              name="NewsArticle"
+              component={NewsArticleScreen}
+            />
           </RootStack.Navigator>
         </NavigationContainer>
       </Provider>
