@@ -1,13 +1,14 @@
-import React from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { StyleSheet, Text, View } from 'react-native';
-import CustomButton from './CustomButton';
 
-import InputField from './InputField';
-import useAuthForm from './hooks/useAuthForm';
-import { signIn } from '../services/authAPI';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from '../App';
+import { signIn } from '../services/authAPI';
+import CustomButton from './CustomButton';
+import InputField from './InputField';
+import { useAppDispatch } from './hooks/redux';
+import useAuthForm from './hooks/useAuthForm';
 
 export interface FormData {
   email: string;
@@ -15,9 +16,19 @@ export interface FormData {
 }
 
 const AuthForm = () => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const [errorMessage, setErrorMessage] = useState('');
+
   const onSubmit: SubmitHandler<FormData> = async data => {
-    await signIn(data, navigation);
+    try {
+      const result = await signIn(data, navigation, dispatch);
+      if (result === 'Неправильный логин или пароль') {
+        setErrorMessage(result);
+      }
+    } catch (error) {
+      setErrorMessage('Произошла ошибка, попробуйте позже');
+    }
   };
 
   const { handleSubmit, control, errors } = useAuthForm(onSubmit);
@@ -25,7 +36,7 @@ const AuthForm = () => {
   return (
     <View style={styles.contentContainer}>
       <View style={styles.centered}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Authorization</Text>
       </View>
 
       <InputField
@@ -43,12 +54,14 @@ const AuthForm = () => {
         name="password"
       />
 
-      <CustomButton label="Login" onPress={handleSubmit(onSubmit)} />
+      {errorMessage !== '' && (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      )}
+
+      <CustomButton label="Sign in" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 };
-
-export default AuthForm;
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -63,4 +76,11 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 30,
   },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
 });
+
+export default AuthForm;
