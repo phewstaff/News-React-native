@@ -17,10 +17,6 @@ export const signIn = async (
     const response: ApiResponse<IUser> = await api.post('/auth/sign_in', data);
 
     if (response.ok && response.data) {
-      dispatch(setAuthenticated(true));
-      dispatch(setUser(response.data));
-      navigation.navigate('News');
-
       if (response.headers) {
         api.setHeaders({
           'access-token': response.headers['access-token'],
@@ -29,12 +25,16 @@ export const signIn = async (
         });
       }
 
+      dispatch(setAuthenticated(true));
+      dispatch(setUser(response.data));
+      navigation.navigate('News');
+
       return response.data;
     } else {
       return 'Неправильный логин или пароль';
     }
   } catch (error) {
-    ('Произошла ошибка, попробуйте позже');
+    console.error('Произошла ошибка, попробуйте позже', error);
     return error;
   }
 };
