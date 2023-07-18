@@ -2,9 +2,9 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
-import { RootStackParams } from '../App';
+import { RootStackParams } from '../../App';
 import NewsItem from '../components/NewsItem';
-import { useAppDispatch, useAppSelector } from '../components/hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getNewsById } from '../services/newsAPI';
 
 type NewsArticleScreenRouteParams = {

@@ -1,4 +1,5 @@
 import { api } from '.';
+import { INewsItem } from '../../types';
 import {
   fetchNewsFailure,
   fetchNewsStart,
@@ -8,7 +9,6 @@ import {
   fetchSelectedNewsfulfilled,
 } from '../redux/newsSlice';
 import { AppDispatch } from '../redux/store';
-import { INewsItem } from '../types';
 
 interface GetNewsResponse {
   news: INewsItem[];

@@ -2,11 +2,11 @@ import { NavigationProp } from '@react-navigation/native';
 import { ApiResponse } from 'apisauce';
 
 import { api } from '.';
-import { RootStackParams } from '../App';
+import { RootStackParams } from '../../App';
+import { IUser } from '../../types';
 import { FormData } from '../components/AuthForm';
 import { AppDispatch } from '../redux/store';
 import { setAuthenticated, setUser } from '../redux/userSlice';
-import { IUser } from '../types';
 
 export const signIn = async (
   data: FormData,

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { INewsItem } from '../types';
+import { INewsItem } from '../../types';
 
 interface NewsState {
   loading: boolean;

@@ -4,11 +4,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
-import CustomHeader from './components/CustomHeader';
-import { setupStore } from './redux/store';
-import AuthScreen from './screens/Auth';
-import NewsScreen from './screens/News';
-import NewsArticleScreen from './screens/NewsArticle';
+import CustomHeader from './src/components/CustomHeader';
+import { setupStore } from './src/redux/store';
+import AuthScreen from './src/screens/Auth';
+import NewsScreen from './src/screens/News';
+import NewsArticleScreen from './src/screens/NewsArticle';
 
 export type RootStackParams = {
   News: undefined;

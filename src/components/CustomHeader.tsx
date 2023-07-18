@@ -2,8 +2,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { FC } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { RootStackParams } from '../App';
-import { useAppSelector } from './hooks/redux';
+import { RootStackParams } from '../../App';
+import { useAppSelector } from '../hooks/redux';
 
 const CustomHeader: FC = ({}) => {
   const user = useAppSelector(state => state.user.user);

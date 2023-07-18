@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { RootStackParams } from '../App';
+import { RootStackParams } from '../../App';
+import { useAppDispatch } from '../hooks/redux';
+import useAuthForm from '../hooks/useAuthForm';
 import { signIn } from '../services/authAPI';
 import CustomButton from './CustomButton';
 import InputField from './InputField';
-import { useAppDispatch } from './hooks/redux';
-import useAuthForm from './hooks/useAuthForm';
 
 export interface FormData {
   email: string;
