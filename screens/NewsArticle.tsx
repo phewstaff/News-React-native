@@ -5,7 +5,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { RootStackParams } from '../App';
 import NewsItem from '../components/NewsItem';
 import { useAppDispatch, useAppSelector } from '../components/hooks/redux';
-import { fetchNewsById } from '../redux/newsSlice';
+import { getNewsById } from '../services/newsAPI';
 
 type NewsArticleScreenRouteParams = {
   newsId: string;
@@ -15,17 +15,22 @@ const NewsArticleScreen = () => {
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<RootStackParams, 'NewsArticle'>>();
   const { newsId } = route.params as NewsArticleScreenRouteParams;
-  const { loading, error, selectedNews } = useAppSelector(state => state.news);
+  const {
+    selectedNewsLoading: loading,
+    selectedNewsError: error,
+    selectedNews,
+  } = useAppSelector(state => state.news);
 
   useEffect(() => {
-    dispatch(fetchNewsById(newsId));
-  }, []);
+    getNewsById(newsId, dispatch);
+  }, [newsId]);
+
   if (loading) {
     return (
       <View style={styles.container}>
         <ActivityIndicator
           style={styles.loadingImage}
-          size="small"
+          size="large"
           color="#888"
         />
       </View>
@@ -49,26 +54,27 @@ const NewsArticleScreen = () => {
   }
 
   return (
-    <NewsItem
-      title={selectedNews.title}
-      image_url={selectedNews.image_url}
-      description={selectedNews.body}
-      isSelectedItem={true}
-    />
+    <View style={styles.container}>
+      <NewsItem
+        title={selectedNews.title}
+        image_url={selectedNews.image_url}
+        description={selectedNews.body}
+        isSelectedItem={true}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
   },
-
   loadingImage: {
     width: 80,
     height: 80,
-    marginRight: 10,
   },
 });
 

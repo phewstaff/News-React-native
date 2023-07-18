@@ -13,7 +13,7 @@ import CustomButton from '../components/CustomButton';
 import NewsItem from '../components/NewsItem';
 import { useAppDispatch, useAppSelector } from '../components/hooks/redux';
 import useAuthChecking from '../components/hooks/useAuthCheck';
-import { fetchNewsData } from '../redux/newsSlice';
+import { getNews } from '../services/newsAPI';
 import { INewsItem } from '../types';
 
 const NewsScreen = () => {
@@ -24,10 +24,9 @@ const NewsScreen = () => {
   const { isAuthenticated } = useAuthChecking();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigation.navigate('Auth');
+    if (isAuthenticated) {
+      getNews(dispatch);
     }
-    dispatch(fetchNewsData());
   }, [isAuthenticated, navigation]);
 
   const renderNewsItem = ({ item }: { item: INewsItem }) => {
@@ -76,18 +75,19 @@ const NewsScreen = () => {
       </View>
     );
   }
-
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={news}
-        renderItem={renderNewsItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.newsList}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-    </View>
-  );
+  if (news) {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={news}
+          renderItem={renderNewsItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.newsList}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
