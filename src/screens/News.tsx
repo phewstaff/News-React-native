@@ -8,13 +8,13 @@ import {
   View,
 } from 'react-native';
 
-import { RootStackParams } from '../App';
+import { RootStackParams } from '../../App';
+import { INewsItem } from '../../types';
 import CustomButton from '../components/CustomButton';
 import NewsItem from '../components/NewsItem';
-import { useAppDispatch, useAppSelector } from '../components/hooks/redux';
-import useAuthChecking from '../components/hooks/useAuthCheck';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import useAuthChecking from '../hooks/useAuthCheck';
 import { getNews } from '../services/newsAPI';
-import { INewsItem } from '../types';
 
 const NewsScreen = () => {
   const navigation: NavigationProp<RootStackParams> = useNavigation();

@@ -2,7 +2,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 
 import { RootStackParams } from '../../App';
-import { setAuthenticated } from '../../redux/userSlice';
+import { setAuthenticated } from '../redux/userSlice';
 import { useAppDispatch, useAppSelector } from './redux';
 
 const useAuthChecking = () => {
